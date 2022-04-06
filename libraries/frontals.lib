@@ -1,0 +1,325 @@
+///////////////////////////////////////////////////////////////////////////////
+version="$Id: frontalsurf.lib  2022-17-03 $";
+category="Singularities";
+info="
+LIBRARY: frontals.lib       Compute geometric invariants of a corank 1 frontal
+                            surface
+
+AUTHORS: C. Munoz-Cabello,  chmuca@alumni.uv.es
+
+PROCEDURES:
+ invariants(f);       compute geometric frontal invariants
+ is_frontal(f);       check if input is frontal
+ wfinvariants(g, z);  compute geometric invariants of the discriminant
+";
+
+LIB "general.lib";      // product
+LIB "presmatrix.lib";   // presmatrix
+LIB "ring.lib";         // ord_test
+LIB "sing.lib";         // milnor
+
+//-----------------------------------------------------------------------------
+proc invariants(map f)
+"USAGE:   invariants(f);  f = map
+COMPUTE:  invariants of a corank 1 frontal surface, using the formulas from
+          C. Munoz-Cabello, J.J. Nuno-Ballesteros and R. Oset-Sinha's "\"\
+RETURN:   * number of swallowtails (@S), cusp-folds (@K), triple points (@T)
+            and folded Whitney umbrellas (@W) in the disentanglement of f
+          * cuspidal edge (@cuspedge) and double point (@dpoints) curves,
+            along with their Milnor numbers
+          * frontal Milnor number
+REMARK:   This version of invariants is only beta. Please send bugs and
+          comments to: <https://github.com/Nelynx/Seminario-SINGULAR>
+          Known to work on Singular version 4.2.0.
+NOTE:     objects with @ sign are exported to global scope
+EXAMPLE:  example invariants; shows an example"
+{
+ string br_name = nameof(basering);  // we need this for presmatrix
+ baseringlocal();
+ checkvars(2);
+ option(noredefine);                 // hide messages such as "redefining"
+
+  // obtain information about f
+ list finfo = c1fsurf(f);
+
+  // check frontal mather gaffney criterion
+ if (finfo[5] == 1)
+ {
+  "// ** the geometric invariants are only guaranteed to exist when the singular";
+  "// ** set of the Nash lift is an isolated set!";
+  ERROR("singular set not isolated");
+ }
+
+  // double point scheme
+ list dpsf = dp_scheme(finfo[2..4]);
+ int @S = dpsf[1];
+ int @K = dpsf[2];
+ int @W = dpsf[3];
+ int @muC = dpsf[4];
+ int @muD = dpsf[5];
+
+  // image triple point space
+ map @f = preimage(f), finfo[1..3];
+ ideal @I = 0;
+ export(@f, @I);                    // we need this for presmatrix
+
+ "";
+ "// Computing triple point space...";
+ presmatrix(@f, @I);
+ setring RTPr;
+ int @T = vdim(std(fitting(PM, 2))) - @S - @K;
+
+ execute("setring " + string(br_name));
+ int @mufC = 2 * @S + @muC;
+ number @mufD = @K + @T + 1/2 * (@muD + 1 - @W - @S);
+ int @muf = @mufD + @T + 1 - @S - @W;
+
+ "";
+ "Isolated frontal singularities:";
+ " * Swallowtails:              @S = " + string(@S);
+ " * Cusp-folds:                @K = " + string(@K);
+ " * Triple points:             @T = " + string(@T);
+ " * Folded Whitney umbrellas:  @W = " + string(@W);
+ export(@S, @K, @T, @W);
+
+ "";
+ "Branch of cuspidal edges:";
+ " * @cuspedge = " + string(@cuspedge);
+ " * Milnor number (source):   @muC = " + string(@muC);
+ " *               (target):  @mufC = " + string(@mufC);
+ "";
+ export(@muC, @mufC);
+
+ "Branch of transversal double points:";
+ " * @dpoints = " + string(@dpoints);
+ " * Milnor number (source):   @muD = " + string(@muD);
+ " *               (target):  @mufD = " + string(@mufD);
+ "";
+ export(@muD, @mufD);
+
+ "Frontal Milnor number:       @muf = " + string(@muf);
+ "";
+ export(@muf);
+}
+example
+{
+ "EXAMPLE";
+ echo = 2;
+
+ ring target = 0, (x, y, z), ds;
+ ring source = 0, (x, y), ds;
+ export(source, target);  // only needed for this example!
+
+  // 5_3 singularity from Marar and Tari's classification (1995)
+ map f = target, x, 5y4 + 3xy2, 4y5 + 2xy3;
+ invariants(f);
+}
+
+//-----------------------------------------------------------------------------
+proc is_frontal(map f)
+{
+ 	// [2] Corollary 2.5
+ ring src = basering;
+ ideal jf = minor(jacob(ideal(f)), nvars(src));
+
+ if (size(std(jf)) > 1)
+ {
+ 	ERROR("not a frontal map");
+ }
+}
+
+//-----------------------------------------------------------------------------
+proc wfinvariants(poly g, poly z)
+"USAGE:   wfinvariants(g, z);  g, z=poly
+COMPUTE:  invariants in the discriminant of G(x, y, z)=(x, y, g(x, y, z)),
+          using the formulas from W.L. Marar, J.A. Montaldi and M.A.S. Ruas's
+          "\Multiplicities of zero-schemes in quasihomogeneous corank-1
+          singularities"\
+RETURN:   number of swallowtails (@S), cusp-folds (@K) and triple points (@T)
+          in the discriminant of G.
+REMARK:   * g must be weighted homogeneous
+          * This version of wfinvariants is only beta. Please send bugs and
+          comments to: <https://github.com/Nelynx/Seminario-SINGULAR>
+          Known to work on Singular version 4.2.0.
+NOTE:     objects with @ sign are exported to global scope
+EXAMPLE:  example wfinvariants; shows an example"
+{
+ /* Let G[x,y,z] = [x,y,g[x,y,z]] be A-finite and weighted homogeneous.
+  * If g has weights [w1, w2, w3] and degree d,
+  *
+  *        [d - w3] [d - 2 w3] [d - 3 w3]
+  *   S = --------------------------------;
+  *                  w1 w2 w3
+  *
+  *   K = S [d - 4 w3];  T = 1/6 K [d - 5 w3]
+  *
+  * where S, K, T are the numbers of swallowtails [A_3], cusp-folds [A_1A_2]
+  * and triple points [A_1A_1A_1] in the discriminant of G. */
+
+ baseringlocal();
+ checkvars(3);
+ option(noredefine);    // hide messages such as "redefining"
+
+ intvec w = wdeg(g);    // find the weights and weighted degree of g
+ int leadvar = rvar(z);	// find which variable was declared
+
+ if(rvar(z) == 0)
+  { ERROR("variable not in base ring"); }
+
+  // product from the formula
+ intvec prod = w[4] div w[leadvar] * (1, 1, 1) - (1, 2, 3);
+
+ /* Singular does not like to use the `/` sign for integer division, so we
+  * need to use `div` instead.
+  * See https://www.singular.uni-kl.de/Manual/4-0-3/sing_466.htm */
+
+ int @S = w[leadvar]^3 * product(prod) div product(w, 1..3);
+ int @K = @S * (w[4] - 4 * w[leadvar]) div w[leadvar];
+ int @T = @K * (w[4] - 5 * w[leadvar]) div (6 * w[leadvar]);
+
+ "";
+ " * Swallowtails:               @S = " + string(@S);
+ " * Cusp-folds:                 @K = " + string(@K);
+ " * Triple points:              @T = " + string(@T);
+ "";
+ " * Target triple point space:       " + string(@S + @K + @T);
+ "";
+ export(@S, @K, @T);
+}
+example
+{
+ "EXAMPLE";
+ echo = 2;
+
+ ring r = 0, (x, y, z), ds;
+
+  // 5_3 singularity from W.L. Marar and F. Tari's classification (1995)
+ wfinvariants(z5 + xz + yz3, z);
+}
+
+//-----------------------------------------------------------------------------
+static proc baseringlocal()
+{
+ option(noredefine);  // hide messages such as "redefining"
+
+ if (ord_test(basering) != -1)
+  { ERROR("no local order ring"); }
+}
+
+//-----------------------------------------------------------------------------
+static proc checkvars(int n)
+{
+ option(noredefine);  // hide messages such as "redefining"
+
+ if (nvars(basering) != n)
+ { ERROR("ring " + nameof(basering) + " must have "
+   + string(n) + " variables"); }
+}
+
+//-----------------------------------------------------------------------------
+static proc c1fsurf (map f)
+{
+ /* Given a frontal f[x,y] = [x, p[x,y], q[x,y]], either p_y | q_y or
+  * q_y | p_y.
+  * Assuming q_y = l * p_y, the singular set S of the Nash lifting is given
+  * by the zero locus of p_y and lambda_y.
+  * This procedure assumes f is given as above to find x, y, gcd(p_y, q_y)
+  * and the codimension of S. */
+
+ is_frontal(f);
+ string source_name = nameof(basering);
+ string target_name = nameof(preimage(f));
+
+  proc find_y (map f)
+  {
+   if (f[1] == var(1)) { return(var(1), var(2)); }
+   if (f[1] == var(2)) { return(var(2), var(1)); }
+
+   "// ** please introduce a map in the form";
+   "// **   map f = " + target_name + ", var, p, q";
+   "// ** where var is a variable in " + source_name + "
+    and p, q are polynomials";
+    
+   ERROR("map not set to prenormal form");
+ }
+
+ list xy = find_y(f);          // (x,y)
+ poly f2y = diff(f[2], xy[2]);
+ poly f3y = diff(f[3], xy[2]);
+
+  // return x, p, q, y, codim(Sigma) (in this order)
+ if (reduce(f3y, f2y) == 0)
+ {
+  poly ly = diff(f3y / f2y, y);
+  ideal S = f2y, ly;
+  return(xy[1], f[2], f[3], xy[2], vdim(std(S)));
+ }
+ else
+ {
+  poly ly = diff(f2y / f3y, y);
+  ideal S = f3y, ly;
+  return(xy[1], f[3], f[2], xy[2], vdim(std(S)));
+ }
+}
+
+//-----------------------------------------------------------------------------
+static proc dp_scheme(poly p, poly q, poly y)
+{
+  // add an auxiliar variable for divided differences
+ ring src = basering;
+ int charsrc = ringlist(src)[1];
+ ring aux = charsrc, @z, ds;
+ def divdifring = src + aux;     // divided differences ring
+ setring divdifring;
+
+ poly p = imap(src, p);
+ poly q = imap(src, q);
+ poly y = imap(src, y);
+
+  "// Computing double point scheme...";
+ poly P = (p - subst(p, y, @z)) / (y - @z);
+ poly Q = (q - subst(q, y, @z)) / (y - @z);
+ poly py = diff(p, y);
+ poly tau = resultant(P, Q, @z) / py^2;
+
+ poly alpha = reduce(P, py) / (y - @z);    // get 2S + K
+ poly beta = reduce(Q, py) / (y - @z);
+ ideal PAA = py, alpha, beta;
+ int dimPAA = vdim(std(PAA));
+ 
+ setring src;
+ poly @cuspedge = imap(divdifring, py);    // get S
+ ideal P3 = @cuspedge, diff(@cuspedge, y);
+ int dimP3 = vdim(std(P3));
+ 
+ poly @dpoints = imap(divdifring, tau);    // get 2S + K + W
+ ideal PT = @cuspedge, @dpoints;
+ int dimPT = vdim(std(PT));
+
+ export(@cuspedge, @dpoints);
+ return(dimP3, dimPAA - 2 * dimP3, dimPT - dimPAA,  // S, K, W
+ 		milnor(@cuspedge), milnor(@dpoints));       // muC, muD
+}
+
+//-----------------------------------------------------------------------------
+static proc wdeg(poly g)
+{
+ /* Given a quasihomogeneous polynomial g, find d such that
+  *
+  *   g(var(1)^w[1], ..., var(n)^w[n])
+  *
+  * is homogeneous of degree d, where w[1]..w[n] are the weights of g. */
+
+ intvec w = qhweight(g);
+
+ if (w == 0)
+ {
+  "// ** this procedure only works for weighted homogeneous polynomials";
+  ERROR(nameof(g) + "not weighted homogeneous");
+ }
+
+ for (int i = 1; i <= size(w); i++) { g = subst(g, var(i), var(i)^w[i]); }
+ return(w, deg(g));
+}
+
+///////////////////////////////////////////////////////////////////////////////
