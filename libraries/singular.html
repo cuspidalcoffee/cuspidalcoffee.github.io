@@ -1,22 +1,59 @@
-<h1 id="singular-libraries">Singular libraries</h1>
-<h2 id="frontals.lib"><code>frontals.lib</code></h2>
-<p>Compute invariants of frontal hypersurfaces. <a href="https://raw.githubusercontent.com/cuspidalcoffee/cuspidalcoffee.github.io/main/libraries/frontals.lib">Download it here!</a> <strong>Note</strong>: Requires <a href="https://sites.google.com/site/aldicio/publicacoes/presentation-matrix-algorithm"><code>presmatrix.lib</code></a>.</p>
-<h3 id="procedures">Procedures:</h3>
-<ul>
-<li><code>invariants(map f)</code>
-<ul>
-<li>Number of swallowtails, cusp-folds, triple points and folded Whitney umbrellas in the frontal disentanglement of <code>f</code>.</li>
-<li>Cuspidal edge and double point sets of <code>f</code>, along with their Milnor numbers.</li>
-<li>Frontal Milnor number of <code>f</code>.</li>
-</ul></li>
-<li><code>is_frontal(map f)</code>
-<ul>
-<li>Check if <code>f</code> is frontal, using a procedure described by <a href="https://arxiv.org/abs/1808.09594">G. Ishikawa</a>.</li>
-</ul></li>
-<li><code>wfinvariants(g, z)</code>
-<ul>
-<li>Number of swallowtails, cusp-folds and triple points in the discriminant of the map <code>G(x,y,z)=(x,y,g(x,y,z))</code>, using a Theorem by <a href="https://www.researchgate.net/publication/2821582_Multiplicities_of_Zero-Schemes_in_Quasihomogeneous_Corank-1_Singularities">W.L. Marar, J. Montaldi and M.A.S. Ruas</a>.</li>
-</ul></li>
-</ul>
-<hr />
-<p><strong>Tip</strong>: You can use <a href="https://curl.se/">curl</a> to download these libraries. Simply type <code>curl &lt;link&gt; --output &lt;libname&gt;</code> on your terminal of choice.</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Cuspidal Coffee - Singular libraries</title>
+	<link rel="icon" type="image/x-icon" href="../img/favicon.svg">
+</head>
+
+<body>
+<table id="body">
+	<tbody>
+	<tr>
+	<td>
+		<h1>Singular libraries</h1>
+
+		<h2><code>frontals.lib</code></h2>
+		<p>
+			Compute invariants of frontal hypersurfaces.
+			<a href="https://raw.githubusercontent.com/cuspidalcoffee/cuspidalcoffee.github.io/main/libraries/frontals.lib">Download it here!</a>
+			<br>
+			<strong>Note</strong>: Requires <a href="https://sites.google.com/site/aldicio/publicacoes/presentation-matrix-algorithm"><code>presmatrix.lib</code></a>.
+		</p>
+	
+		<h3>Procedures:</h3>
+		<ul>
+		<li><code>invariants(map f)</code>:
+		<ul>
+		<li>Number of swallowtails, cuspidal double points, triple points and folded Whitney umbrellas in the frontal disentanglement of <code>f</code>.</li>
+		<li>Cuspidal edge and double point sets of <code>f</code>, along with their Milnor numbers.</li>
+		<li>Frontal Milnor number of <code>f</code>.</li>
+		</ul>
+		</li>
+		<li>
+			<code>is_frontal(map f)</code>:
+			<br>
+			Check if <code>f</code> is frontal, using a procedure described by <a href="https://arxiv.org/abs/1808.09594">G. Ishikawa</a>.
+		</li>
+		
+		<li>
+			<code>wfinvariants(g, z)</code>:
+			<br>
+			Number of swallowtails, cusp-folds and triple points in the discriminant of the map <code>G(x,y,z)=(x,y,g(x,y,z))</code>, using a Theorem by <a href="https://www.researchgate.net/publication/2821582_Multiplicities_of_Zero-Schemes_in_Quasihomogeneous_Corank-1_Singularities">W.L. Marar, J. Montaldi and M.A.S. Ruas</a>.
+		</li>
+		</ul>
+
+		<hr>
+		<p>
+			<br>You can use <a href="https://curl.se/">curl</a> to download these libraries.
+			Simply type <code>curl &lt;link&gt; --output &lt;libname&gt;</code> on your terminal of choice.
+		</p>
+
+	</td>
+	</tr>
+	</tbody>
+	
+</table>	
+</body>
+
+</html>
