@@ -1,0 +1,9 @@
+nav:
+-   name: Home
+    link: /
+-   name: Career
+    link: /career.html
+-   name: Tech
+    link: /tech.html
+-   name: Links
+    link: /links.html

@@ -1,0 +1,45 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox='-50 -50 100 100'>
+	<!-- this is the logo version, modified to have bigger stroke width and radius -->
+	<style type='text/css'>
+		line, path {
+			stroke-width: 4;
+			stroke: red;
+			fill: none;
+		}
+		marker path, circle {
+			stroke-width: 0;
+			fill: red;
+		}
+	</style>
+
+	<defs>
+		<marker id='mtri' viewBox='0 0 10 10' refX='1' refY='5' markerUnits='userSpaceOnUse' markerWidth='11' markerHeight='11' orient='auto'>
+			<path d='M 0 0 L 10 5 L 0 10 z' />
+		</marker>
+		<line id='line' x1='-40' x2='40' y1='0' y2='0' marker-end='url(#mtri)' />
+		<circle id='dot' r='4' />
+	</defs>
+
+	<!-- arrows -->
+	<use href='#line' />
+	<use href='#line' transform='rotate(45)' />
+	<use href='#line' transform='rotate(90)' />
+	<use href='#line' transform='rotate(135)' />
+	<!-- we continue to do the rest just for easy marker-end usage -->
+	<use href='#line' transform='rotate(180)' />
+	<use href='#line' transform='rotate(225)' />
+	<use href='#line' transform='rotate(270)' />
+	<use href='#line' transform='rotate(315)' />
+
+	<!-- semicircle -->
+	<path d='M -25 0 A 25 25 0 1 1 25 0' />
+
+	<!-- the dots, their positions are calculated by hand.
+		figure out their radian angle in a circle of radius=1, then plug the angle into cos and sin.
+		then, multiply the resulting coordinates by 25 (our actual radius) for the results -->
+	<use href='#dot' x='-23.096988312782' y='9.5670858091273' />
+	<use href='#dot' x='-9.5670858091272' y='23.096988312782' />
+	<use href='#dot' x='9.5670858091273' y='23.096988312782' />
+	<use href='#dot' x='23.096988312782' y='9.5670858091272' />
+</svg>

@@ -1,0 +1,2 @@
+#!/bin/sh
+cat $(dirname "$0")/util.sh "$1" > "$2"/$(basename "$1")

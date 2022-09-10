@@ -1,0 +1,12 @@
+navleft:
+-   name: Home
+    link: /
+-   name: Libraries
+    link: /libraries.html
+-   name: Graphics
+    link: /graphics.html
+navright:
+-   name: ORCiD
+    link: https://orcid.org/0000-0002-3115-1851
+-   name: ResearchGate
+    link: https://www.researchgate.net/profile/Christian-Munoz-Cabello-2

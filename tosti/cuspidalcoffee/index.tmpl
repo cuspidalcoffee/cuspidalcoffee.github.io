@@ -1,0 +1,7 @@
+{{ define "index" -}}
+<ul>{{ range (datasource "index") }}
+	<li><a href="{{ . }}">{{ . }}</a></li>
+{{ end }}</ul>
+{{- end -}}
+
+{{ template "tmpl/layout.html" (tmpl.Exec "index") }}

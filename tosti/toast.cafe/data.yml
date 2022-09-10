@@ -1,0 +1,20 @@
+navleft:
+-   name: Home
+    link: /
+navright:
+-   name: Blogs
+    link: https://pencil.toast.cafe
+-   name: Chat
+    link: https://irc.toast.cafe
+-   name: CyberChef
+    link: https://cchef.toast.cafe
+-   name: Fedi
+    link: https://mk.toast.cafe
+-   name: Pass
+    link: https://vaultwarden.toast.cafe
+-   name: RSS
+    link: https://rss.toast.cafe
+-   name: Tildes
+    link: https://tilde.toast.cafe
+-   name: VCS
+    link: https://fossil.one
