@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="site.css" />
+		<link rel="icon" type="image/svg+xml" href="/img/logo.svg" />
+		<link rel="alternate icon" href="/img/logo.svg" />
+	</head>
+	<body>
+		<nav class="container">
+			<ul>
+		<li><a href="/">Home</a></li>
+	
+		<li><a href="/libraries.html">Libraries</a></li>
+	
+		<li><a href="/graphics.html">Graphics</a></li>
+	</ul>
+			<ul>
+		<li><a href="https://orcid.org/0000-0002-3115-1851">ORCiD</a></li>
+	
+		<li><a href="https://www.researchgate.net/profile/Christian-Munoz-Cabello-2">ResearchGate</a></li>
+	</ul>
+		</nav>
+		<main class="container"><h1>Libraries</h1>
+<p>A collection of libraries written in order to facilitate mathematical computations.</p>
+<h2><code>frontals.lib</code> (Singular)</h2>
+<p>Compute invariants of frontal hypersurfaces. [Download it here!][frontals.lib]</p>
+<p><strong>Note:</strong> Requires <a href="https://sites.google.com/site/aldicio/publicacoes/presentation-matrix-algorithm">presmatrix.lib</a>.</p>
+<h3>Procedures</h3>
+<ul>
+<li>
+<p><code>invariants(map f)</code></p>
+<ul>
+<li>Number of swallowtails, cuspidal double points, triple points and folded Whitney umbrellas in the frontal disentanglement of <code>f</code>.</li>
+<li>Cuspidal edge and double point sets of <code>f</code>, along with their Milnor numbers.</li>
+<li>Frontal Milnor number of <code>f</code>.</li>
+</ul>
+</li>
+<li>
+<p><code>is_frontal(map f)</code></p>
+<ul>
+<li>Check if f is frontal, using <a href="https://arxiv.org/abs/1808.09594">a procedure by G. Ishikawa</a>.</li>
+</ul>
+</li>
+<li>
+<p><code>wfinvariants(poly g, z)</code></p>
+<ul>
+<li>Number of swallowtails, cuspidal double points and triple points in the discriminant of the map <code>G(x,y,z)=(x, y, g(x,y,z))</code>, using <a href="https://www.researchgate.net/publication/2821582_Multiplicities_of_Zero-Schemes_in_Quasihomogeneous_Corank-1_Singularities">a Theorem by W.L. Marar, J. Montaldi and M.A.S. Ruas</a>.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<p>You can use <a href="https://curl.se/">cURL</a> to download these libraries! Simply type <code>curl &lt;link&gt; --output &lt;libname&gt;</code> on your terminal of choice.</p>
+</main>
+	</body>
+</html>
+
