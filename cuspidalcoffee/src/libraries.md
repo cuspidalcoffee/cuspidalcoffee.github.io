@@ -5,7 +5,7 @@ A collection of libraries written in order to facilitate mathematical computatio
 ## `frontals.lib` (Singular)
 
 Compute invariants of frontal hypersurfaces.
-[Download it here!][frontals.lib]
+[Download it here!](https://github.com/cuspidalcoffee/Singular/tree/main/Frontales)
 
 **Note:** Requires
 [presmatrix.lib](https://sites.google.com/site/aldicio/publicacoes/presentation-matrix-algorithm).
