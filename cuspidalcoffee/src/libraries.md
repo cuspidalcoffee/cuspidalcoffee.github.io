@@ -2,9 +2,6 @@
 
 A collection of libraries written in order to facilitate mathematical computations.
 
-* [Julia (Oscar)](../libraries/julia.html)
-* [Singular](../libraries/singular.html)
-
 ## `frontals.lib` (Singular)
 
 Compute invariants of frontal hypersurfaces.
