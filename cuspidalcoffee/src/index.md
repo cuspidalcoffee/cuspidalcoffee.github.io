@@ -9,6 +9,4 @@ endeavours.
 * [Iberosing 2022](presentations/Ibero22.pdf)
 
 ---
-Pages generated with [Static Websites](https://fossil.one/toast/static/timeline).
-
 This website is best visualised in a [teleprinter](https://en.wikipedia.org/wiki/Teleprinter).
