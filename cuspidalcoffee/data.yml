@@ -7,6 +7,9 @@ navleft:
     link: /graphics.html
 -   name: Cool stuff
     link: /coolstuff.html
+-   name: Roadmap
+    link: /roadmap.html
+    
 navright:
 -   name: ORCiD
     link: https://orcid.org/0000-0002-3115-1851
