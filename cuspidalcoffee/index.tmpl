@@ -1,6 +1,6 @@
 {{ define "index" -}}
 <ul>{{ range (datasource "index") }}
-	<li><a href="{{ . }}">{{ . }}</a></li>
+	<li><a rel="me" href="{{ . }}">{{ . }}</a></li>
 {{ end }}</ul>
 {{- end -}}
 
