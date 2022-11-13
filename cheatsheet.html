@@ -17,31 +17,46 @@
 	
 		<li><a href="/graphics.html">Graphics</a></li>
 	
-		<li><a href="/coolstuff.html">Cool stuff</a></li>
-	
 		<li><a href="/roadmap.html">Roadmap</a></li>
 	</ul>
 			<ul>
-		<li><a href="https://orcid.org/0000-0002-3115-1851">ORCiD</a></li>
+		<li><a href="/about.html">About me</a></li>
 	
-		<li><a href="https://www.researchgate.net/profile/Christian-Munoz-Cabello-2">ResearchGate</a></li>
-	
-		<li><a href="https://types.pl/@cuspidalcoffee">Mastodon</a></li>
+		<li><a href="https://github.com/cuspidalcoffee">Repository</a></li>
 	</ul>
 		</nav>
 		<main class="container"><h1>Julia cheatsheet</h1>
-<h3>Useful references</h3>
+<p><a href="#refs">Useful references</a> / <a href="#misc">Miscellaneous</a> / <a href="#functions">Writing functions</a> / <a href="#array">Array manipulation</a> / <a href="#bib">References</a></p>
+<h3><a id="refs">Useful references</a></h3>
 <ul>
 <li><a href="https://docs.julialang.org/en/v1/manual/style-guide/#Style-Guide">Style Guide: Recommended practices from the developer team</a></li>
 <li><a href="https://docs.julialang.org/en/v1/manual/variables/#man-variables">Variables and naming conventions</a></li>
 </ul>
-<h2>Writing functions</h2>
+<h3><a id="misc">Miscellaneous</a></h3>
+<p>Open notebook:</p>
+<pre><code>]using IJulia
+notebook()
+</code></pre>
+<p>Packages:</p>
+<pre><code>]add Module 	# install modules
+]up 			# update modules
+]using Module 	# enable modules
+</code></pre>
+<p>Creating packages:</p>
+<pre><code>]generate ModuleName 	# Initialise
+
+;cd path/to/module/folder
+]activate . 			# Enable module
+</code></pre>
+<h3><a id="functions">Writing functions</a></h3>
 <p>Function syntax:</p>
-<pre><code>julia&gt; function f(x,y)
+<pre><code>	# Named
+julia&gt; function f(x,y)
            x + y
        end
 f (generic function with 1 method)
 
+	# Anonymous (&quot;lambda&quot;)
 julia&gt; x -&gt; x^2 + 2x - 1
 #1 (generic function with 1 method)
 </code></pre>
@@ -53,6 +68,12 @@ elseif x &gt; y
 else
     println(&quot;x is equal to y&quot;)
 end
+
+	# Short-circuiting
+x == y &amp;&amp; println(&quot;x is equal to y&quot;) || println(&quot;x is not equal to y&quot;)
+
+	# Ternary operator
+x == y ? println(&quot;x is equal to y&quot;) : println(&quot;x is not equal to y&quot;)
 </code></pre>
 <p>Loops:</p>
 <pre><code>julia&gt; for i = 1:5
@@ -64,11 +85,30 @@ julia&gt; while i &lt;= 5
            global i += 1
        end
 </code></pre>
-<h2>References</h2>
+<h3><a id="array">Array manipulation</a></h3>
+<p>Declaration:</p>
+<pre><code>julia&gt; 1:8 			# UnitRange
+julia&gt; 1, 4, 6		# Tuple
+julia&gt; [1 2; 3 4]	# Array
+</code></pre>
+<p>Measuring:</p>
+<pre><code>julia&gt; length([1 3; 6 9])
+4
+
+julia&gt; size([1 3; 6 9])
+(2, 2)
+
+julia&gt; size([1 3])
+(1, 2)
+</code></pre>
+<p>Broadcasting (“maps”):</p>
+<pre><code>julia&gt; div.([5 10],5)
+1×2 Matrix{Int64}:
+ 1  2
+</code></pre>
+<h3><a id="bib">References</a></h3>
 <ul>
 <li><a href="https://docs.julialang.org/en/v1/">Julia documentation</a></li>
-<li><a href="">AbstractAlgebra documentation</a></li>
-<li><a href="">Oscar documentation</a></li>
 </ul>
 </main>
 	</body>
