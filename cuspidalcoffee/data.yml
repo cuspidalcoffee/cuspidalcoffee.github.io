@@ -5,15 +5,11 @@ navleft:
     link: /libraries.html
 -   name: Graphics
     link: /graphics.html
--   name: Cool stuff
-    link: /coolstuff.html
 -   name: Roadmap
     link: /roadmap.html
     
 navright:
--   name: ORCiD
-    link: https://orcid.org/0000-0002-3115-1851
--   name: ResearchGate
-    link: https://www.researchgate.net/profile/Christian-Munoz-Cabello-2
--   name: Mastodon
-    link: https://types.pl/@cuspidalcoffee
+-   name: About me
+    link: /about.html
+-   name: Repository
+    link: https://github.com/cuspidalcoffee
