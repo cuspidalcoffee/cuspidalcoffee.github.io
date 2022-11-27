@@ -1,21 +1,6 @@
 # Cool stuff from around the web!
 
-## Outside In - How to turn a sphere inside out
-
-[Click here!](https://www.youtube.com/watch?v=OI-To1eUtuU)
-		
-I have a challenge for you: can you turn a sphere inside out without poking
-holes in it or creasing it?
-It is not easy and we will need to use some out-of-this-world material, but I
-certainly can!
-
-In this video produced by the Univertsity of Minnesota's now-closed
-[Geometry Center](http://www.geom.uiuc.edu/), the authors explore the notions
-of oriented hypersurface, winding number and diffeomorphism through
-animated illustrations.
-This video is an internet classic that has spawned a number of humorous
-spin-offs over the years, as well as surprised thousands of people with their
-surprising transformations.
+[My favourite math videos from YouTube (playlist)](https://youtube.com/playlist?list=PLMirnLPFwAXdZk15NXpwjTGWH8hRHbB-3)
 
 ## Visualizing quaternions: An explorable video series
 
