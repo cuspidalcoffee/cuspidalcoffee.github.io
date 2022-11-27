@@ -15,6 +15,7 @@ Click on an image to get the corresponding (self-contained) source code.
 [![Deformation retract](img/graphics/TikZ/defretract.png)](https://raw.githubusercontent.com/cuspidalcoffee/examples/main/TikZPicture/defretract.tex)
 [![Double point space](img/graphics/TikZ/double_point.png)](https://raw.githubusercontent.com/cuspidalcoffee/examples/main/TikZPicture/double_point.tex)
 [![Path across two connected components](img/graphics/TikZ/pathcomponents.png)](https://raw.githubusercontent.com/cuspidalcoffee/examples/main/TikZPicture/pathcomponents.tex)
+[![Parameter space for the A4 singularity](img/graphics/TikZ/parameter_space.png)](https://raw.githubusercontent.com/cuspidalcoffee/examples/main/TikZPicture/parameter_space.tex)
 	
 ## Ti*k*Zcd
 
