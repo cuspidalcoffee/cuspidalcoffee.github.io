@@ -12,6 +12,9 @@ I also develop libraries for [Oscar], though my main focus at the moment is to i
 * [Iberosing 2021](presentations/Ibero21.pdf)
 * [Worksing 2022](presentations/Work22.pdf)
 * [Iberosing 2022](presentations/Ibero22.pdf)
+* [Iberosing 2022](presentations/Ibero22.pdf)
+* [Rényi Institute 2023](presentations/Renyi23.pdf)
+* [AM115 2023](presentations/Jaca23.pdf)
 
 <!-- -->
 [Ishikawa]: (https://projecteuclid.org/journals/asian-journal-of-mathematics/volume-9/issue-1/Infinitesimal-Deformations-and-Stability-of-Singular-Legendre-Submanifolds/ajm/1118689230.full)
